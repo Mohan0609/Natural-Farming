@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products | Chittoor Natural Farms</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2e7d32;
+            --secondary: #ff9800;
+            --accent1: #8bc34a;
+            --accent2: #4caf50;
+            --accent3: #ffc107;
+            --dark: #1b5e20;
+            --light: #f1f8e9;
+        }
+
+        body {
+            background-color: var(--light);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3, h4 {
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+            background: var(--dark);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* Header Styles */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent1);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Products Section */
+        .products {
+            padding-top: 150px;
+            background: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-content {
+            padding: 20px;
+        }
+
+        .product-content h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .product-content p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        .quantity-selector {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--accent1);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .cart-summary {
+            background: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .cart-items {
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent1);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo"><i class="fas fa-leaf"></i>Chittoor<span>NaturalFarms</span></a>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html" style="color: var(--primary);">Products</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#reviews">Reviews</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Products Section -->
+    <section class="products">
+        <div class="container">
+            <h2 class="section-title">Our Fresh Organic Products</h2>
+            <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem;">All our vegetables are grown using 100% natural farming methods without any chemical pesticides or fertilizers.</p>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1594282485400-8e5d5f8a7c1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="product-content">
+                        <h3>Fresh Tomatoes</h3>
+                        <p>Juicy, flavorful tomatoes grown naturally without chemical fertilizers. Rich in vitamins and antioxidants.</p>
+                        <div class="price">₹40/kg</div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus" data-product="tomatoes">-</button>
+                            <input type="number" class="quantity-input" id="tomatoes-qty" value="0" min="0">
+                            <button class="quantity-btn plus" data-product="tomatoes">+</button>
+                        </div>
+                        <button class="btn add-to-cart" data-product="tomatoes" data-price="40">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1582515073490-39981397c445?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="product-content">
+                        <h3>Purple Brinjal</h3>
+                        <p>Fresh, purple brinjals with excellent texture and taste. Perfect for traditional Andhra recipes.</p>
+                        <div class="price">₹35/kg</div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus" data-product="brinjal">-</button>
+                            <input type="number" class="quantity-input" id="brinjal-qty" value="0" min="0">
+                            <button class="quantity-btn plus" data-product="brinjal">+</button>
+                        </div>
+                        <button class="btn add-to-cart" data-product="brinjal" data-price="35">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1576045057995-568f588f82fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="product-content">
+                        <h3>Fresh Okra (Bhendi)</h3>
+                        <p>Tender, green okra with minimal fiber. Grown using organic compost and natural pest control.</p>
+                        <div class="price">₹50/kg</div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus" data-product="okra">-</button>
+                            <input type="number" class="quantity-input" id="okra-qty" value="0" min="0">
+                            <button class="quantity-btn plus" data-product="okra">+</button>
+                        </div>
+                        <button class="btn add-to-cart" data-product="okra" data-price="50">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="product-content">
+                        <h3>Green Chillies</h3>
+                        <p>Spicy green chillies with perfect heat levels. Essential for Andhra cuisine and packed with vitamin C.</p>
+                        <div class="price">₹60/kg</div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus" data-product="chillies">-</button>
+                            <input type="number" class="quantity-input" id="chillies-qty" value="0" min="0">
+                            <button class="quantity-btn plus" data-product="chillies">+</button>
+                        </div>
+                        <button class="btn add-to-cart" data-product="chillies" data-price="60">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1594282485400-8e5d5f8a7c1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="product-content">
+                        <h3>Fresh Beans</h3>
+                        <p>Fresh string beans, crisp and nutritious. Grown on natural trellises without chemical inputs.</p>
+                        <div class="price">₹45/kg</div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus" data-product="beans">-</button>
+                            <input type="number" class="quantity-input" id="beans-qty" value="0" min="0">
+                            <button class="quantity-btn plus" data-product="beans">+</button>
+                        </div>
+                        <button class="btn add-to-cart" data-product="beans" data-price="45">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1594282485400-8e5d5f8a7c1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="product-content">
+                        <h3>Cucumber</h3>
+                        <p>Cool, hydrating cucumbers perfect for salads and raitas. Grown with natural water conservation methods.</p>
+                        <div class="price">₹30/kg</div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus" data-product="cucumber">-</button>
+                            <input type="number" class="quantity-input" id="cucumber-qty" value="0" min="0">
+                            <button class="quantity-btn plus" data-product="cucumber">+</button>
+                        </div>
+                        <button class="btn add-to-cart" data-product="cucumber" data-price="30">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cart-summary">
+                <h3>Your Order Summary</h3>
+                <div class="cart-items" id="cart-items">
+                    <p>No items added to cart yet.</p>
+                </div>
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cart-total">₹0</span>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="payment.html" class="btn btn-secondary" id="checkout-btn" style="display: none;">Proceed to Checkout</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Chittoor Natural Farms</h3>
+                    <p>Growing fresh, organic vegetables using 100% natural farming methods in Chittoor District.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#reviews">Reviews</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Chittoor District, Andhra Pradesh</p>
+                    <p><i class="fas fa-phone"></i> +91 9908995116</p>
+                    <p><i class="fas fa-envelope"></i> mohankol092002@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Chittoor Natural Farms. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Cart functionality
+        let cart = {};
+        
+        // Quantity buttons
+        document.querySelectorAll('.quantity-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const product = this.getAttribute('data-product');
+                const input = document.getElementById(`${product}-qty`);
+                let value = parseInt(input.value);
+                
+                if (this.classList.contains('plus')) {
+                    value++;
+                } else if (this.classList.contains('minus') && value > 0) {
+                    value--;
+                }
+                
+                input.value = value;
+            });
+        });
+        
+        // Add to cart
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const product = this.getAttribute('data-product');
+                const price = parseInt(this.getAttribute('data-price'));
+                const qtyInput = document.getElementById(`${product}-qty`);
+                const quantity = parseInt(qtyInput.value);
+                
+                if (quantity > 0) {
+                    cart[product] = {
+                        quantity: quantity,
+                        price: price,
+                        total: quantity * price
+                    };
+                    
+                    updateCartDisplay();
+                    document.getElementById('checkout-btn').style.display = 'inline-block';
+                } else {
+                    alert('Please select quantity first!');
+                }
+            });
+        });
+        
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            
+            if (Object.keys(cart).length === 0) {
+                cartItems.innerHTML = '<p>No items added to cart yet.</p>';
+                cartTotal.textContent = '₹0';
+                return;
+            }
+            
+            let itemsHTML = '';
+            let total = 0;
+            
+            for (const product in cart) {
+                const item = cart[product];
+                itemsHTML += `
+                    <div class="cart-item">
+                        <span>${product.charAt(0).toUpperCase() + product.slice(1)} (${item.quantity}kg)</span>
+                        <span>₹${item.total}</span>
+                    </div>
+                `;
+                total += item.total;
+            }
+            
+            cartItems.innerHTML = itemsHTML;
+            cartTotal.textContent = `₹${total}`;
+            
+            // Store cart in localStorage for the next page
+            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('cartTotal', total);
+        }
+    </script>
+</body>
+</html>
